@@ -1,69 +1,68 @@
 #include <cmath>
+
 template<typename T>
 class Vec2 {
 public:
     T x, y;
 
-    Vec2() :x(0), y(0) {}
-	Vec2(T x, T y) : x(x), y(y) {}
-	Vec2& operator=(const Vec2& v) {
-    // Copy the values from 'v' to 'this' object
-    this->x = v.x;
-    this->y = v.y;
+    Vec2() : x(0), y(0) {}
+    Vec2(T x, T y) : x(x), y(y) {}
 
-    // Return the object itself, not a copy!
-    return *this;
-   }
-   Vec2& operator+=(const Vec2& v) {
-    // Add the values from 'v' to 'this' object
-    this->x += v.x;
-    this->y += v.y;
+    // Copy assignment
+    Vec2& operator=(const Vec2& v) {
+        x = v.x;
+        y = v.y;
+        return *this;
+    }
 
-    // Return the object itself, not a copy!
-    return *this;
-   }
-   Vec2 operator+(Vec2& v) {
-		return Vec2(x + v.x, y + v.y);
-	}
-	Vec2 operator-(Vec2& v) {
-		return Vec2(x - v.x, y - v.y);
-	}
+    // Compound assignment: +=, -=, *=, /=
+    Vec2& operator+=(const Vec2& v) {
+        x += v.x; y += v.y;
+        return *this;
+    }
 
-   Vec2 operator+(double s) {
-		return Vec2(x + s, y + s);
-	}
-	Vec2 operator-(double s) {
-		return Vec2(x - s, y - s);
-	}
-	Vec2 operator*(double s) {
-		return Vec2(x * s, y * s);
-	}
-	Vec2 operator/(double s) {
-		return Vec2(x / s, y / s);
-	}
+    Vec2& operator-=(const Vec2& v) {
+        x -= v.x; y -= v.y;
+        return *this;
+    }
 
-   Vec2& operator-=(const Vec2& v) {
-    // Subtract the values from 'v' to 'this' object
-    this->x -= v.x;
-    this->y -= v.y;
+    Vec2& operator*=(T scalar) {
+        x *= scalar; y *= scalar;
+        return *this;
+    }
 
-    // Return the object itself, not a copy!
-    return *this;
-   }
-   Vec2& operator*=(T scalar) {
-    // Multiply the values from 'scalar' to 'this' object
-    this->x *= scalar;
-    this->y *= scalar;
+    Vec2& operator/=(T scalar) {
+        x /= scalar; y /= scalar;
+        return *this;
+    }
 
-    // Return the object itself, not a copy!
-    return *this;
-   }
-   Vec2& operator/=(T scalar) {
-    // Divide the values from 'scalar' to 'this' object
-    this->x /= scalar;
-    this->y /= scalar;
+    // Arithmetic: Vec2 + Vec2
+    Vec2 operator+(const Vec2& v) const {
+        return Vec2(x + v.x, y + v.y);
+    }
 
-    // Return the object itself, not a copy!
-    return *this;
-   }
+    Vec2 operator-(const Vec2& v) const {
+        return Vec2(x - v.x, y - v.y);
+    }
+
+    // Arithmetic: Vec2 * scalar, Vec2 / scalar
+    Vec2 operator*(T scalar) const {
+        return Vec2(x * scalar, y * scalar);
+    }
+
+    Vec2 operator/(T scalar) const {
+        return Vec2(x / scalar, y / scalar);
+    }
+
+    // Optional: Vec2 + scalar, Vec2 - scalar
+    Vec2 operator+(T scalar) const {
+        return Vec2(x + scalar, y + scalar);
+    }
+
+    Vec2 operator-(T scalar) const {
+        return Vec2(x - scalar, y - scalar);
+    }
+    T length() const {
+            return std::sqrt(x * x + y * y);
+        }
 };
