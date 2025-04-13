@@ -65,4 +65,11 @@ public:
     T length() const {
             return std::sqrt(x * x + y * y);
         }
+
+    Vec2<T> rotated(double angle) const {
+        double cs = std::cos(angle);
+        double sn = std::sin(angle);
+        return Vec2<T>(x * cs - y * sn, x * sn + y * cs);
+    }
+
 };
