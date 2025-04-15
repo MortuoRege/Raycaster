@@ -35,6 +35,12 @@ While these are mathematically correct, in practice most implementations use the
 
 This works because the ray direction vector (`rayDir`) is normalized or used in a consistent scale, so the geometric meaning is preserved.
 
+## Image of the final RayCaster ##
+
+![Demo Screenshot](Images/RayCaster.png)
+
+
+
 
 
 
